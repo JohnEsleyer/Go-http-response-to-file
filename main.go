@@ -3,10 +3,12 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/mohae/struct2csv"
 )
@@ -52,6 +54,7 @@ type Person struct {
 }
 
 func main() {
+	start := time.Now()
 	n, err := strconv.Atoi(os.Args[1])
 	if err != nil {
 		return
@@ -111,4 +114,7 @@ func main() {
 			total += 1
 		}
 	}
+	timeElapsed := time.Since(start)
+	fmt.Println("Processed ", total, " records")
+	fmt.Println("Time elapsed till now ", timeElapsed)
 }
